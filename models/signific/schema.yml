@@ -1,0 +1,87 @@
+version: 1
+
+models:
+  - name: stg_events
+    description: "Model with events from Google Analytics"
+    columns:
+    - name: event_date
+      description: "The event date"
+      data_tests:
+        - not_null
+    - name: event_timestamp
+      description: "The timestamp of the event"
+    - name: user_id
+      description: "Id of the user"
+    - name: cookie_consent
+      description: "If user accepted coockies"
+      data_tests:
+        - accepted_values:
+            values: ['Yes', 'No']
+    - name: sessions_id
+      description: "Id of the session"
+    - name: event_name
+      description: "Name of the event"
+    - name: page_url
+      description: "Page URL"
+    - name: page_title
+      description: "Page title"
+    - name: source
+      description: "Source"
+    - name: page_referrer
+      description: "Page referrer"
+    - name: device
+      description: "The device the user is on"
+    - name: os
+      description: "The operating system the user is on"
+    - name: country
+      description: "Country"
+    - name: city
+      description: "City"
+    - name: page_type
+      description: "Type of page (start, webinar, jobb, artiklar)"
+  - name: clean_events
+    description: "Model with clean events from Google Analytics"
+    columns:
+      - name: event_date
+        description: "The event date"
+        data_tests:
+          - not_null
+      - name: event_timestamp
+        description: "The timestamp of the event"
+      - name: user_id
+        description: "Id of the user"
+        data_tests:
+          - accepted_values:
+              values: ['Yes', 'No']
+      - name: sessions_id
+        description: "Id of the session"
+      - name: sessions_number
+        description: "Name of the event"
+      - name: page_url
+        description: "Page URL"
+      - name: page_title
+        description: "Page title"
+      - name: source
+        description: "Source"
+      - name: page_referrer
+        description: "Page referrer"
+      - name: device
+        description: "The device the user is on"
+      - name: os
+        description: "The operating system the user is on"
+      - name: country
+        description: "Country"
+      - name: city
+        description: "City"
+      - name: page_type
+        description: "Type of page (start, webinar, jobb, artiklar)"
+sources:
+  - name: signific_gcp
+    description: "Source data from Signific GCP project."
+    database: signific-gcp
+    schema: analytics_254801477
+    tables:
+      - name: events_*
+        description: "Raw events."
+      - name: pseudonymous_users_*
+        description: "Raw events."
